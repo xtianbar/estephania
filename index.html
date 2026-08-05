@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farewell Message</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Alpine.js for state management -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen m-0 font-sans p-4">
+
+    <!-- Envelope Container -->
+    <div 
+        x-data="{ open: false }" 
+        @click="open = !open"
+        class="relative w-[320px] h-[220px] sm:w-[384px] sm:h-[256px] cursor-pointer mx-auto"
+    >
+        <!-- Back of envelope -->
+        <div class="absolute inset-0 bg-slate-300 rounded-t-xl rounded-b-md z-0"></div>
+        
+        <!-- The Letter -->
+        <div 
+            :class="open ? '-translate-y-28 sm:-translate-y-32 z-40 delay-300' : 'translate-y-0 z-10 delay-0'"
+            class="absolute bottom-2 left-[5%] w-[90%] h-[90%] bg-white rounded-md shadow-md p-5 flex flex-col justify-center items-center text-center transition-all duration-500 ease-in-out"
+        >
+            <h3 class="text-gray-800 text-lg font-bold mb-2">Best of luck!</h3>
+            <p class="text-gray-600 text-sm leading-relaxed">
+                I'm really going to miss working with you! Wishing you the absolute best on your new adventure. Let's make sure to keep in touch.
+            </p>
+        </div>
+        
+        <!-- Front envelope pockets (CSS Triangles via arbitrary border values) -->
+        <!-- Mobile base: 320px width = 160px L/R borders | sm base: 384px width = 192px L/R borders -->
+        <div 
+            class="absolute inset-0 pointer-events-none z-30 rounded-b-md
+                   border-l-[160px] border-r-[160px] border-b-[120px] border-t-[100px]
+                   sm:border-l-[192px] sm:border-r-[192px] sm:border-b-[140px] sm:border-t-[116px]
+                   border-l-slate-400 border-r-slate-400 border-b-slate-500 border-t-transparent"
+        ></div>
+        
+        <!-- Top Flap -->
+        <div 
+            :class="open ? '[transform:rotateX(180deg)] z-0 delay-0' : '[transform:rotateX(0deg)] z-40 delay-300'"
+            class="absolute top-0 left-0 origin-top transition-all duration-500 ease-in-out
+                   border-l-[160px] border-r-[160px] border-t-[110px] border-b-0
+                   sm:border-l-[192px] sm:border-r-[192px] sm:border-t-[130px]
+                   border-x-transparent border-t-slate-300"
+        ></div>
+
+        <!-- Hover / Tap text instruction -->
+        <div 
+            :class="open ? 'opacity-0' : 'opacity-100'"
+            class="absolute -bottom-10 w-full text-center text-gray-500 text-sm font-semibold transition-opacity duration-300"
+        >
+            Tap to open
+        </div>
+    </div>
+
+</body>
+</html>
